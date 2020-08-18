@@ -76,7 +76,7 @@ export function saveSub (sub) {
   })
 }
 
-// 新增
+// ����
 export function getSysConfighistory (parameter) {
   return request({
     url: api.sysConfighistory.list,

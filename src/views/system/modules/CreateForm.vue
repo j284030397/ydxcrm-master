@@ -8,15 +8,31 @@
     @cancel="() => { $emit('cancel') }"
   >
     <a-spin :spinning="loading">
-      <a-form :form="form" v-bind="formLayout">
-        <!-- 检查是否有 id 并且大于0，大于0是修改。其他是新增，新增不显示主键ID -->
-        <a-form-item v-show="model && model.id > 0" label="主键ID">
-          <a-input v-decorator="['id', { initialValue: 0 }]" disabled />
-        </a-form-item>
-        <a-form-item label="描述">
-          <a-input v-decorator="['description', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
-        </a-form-item>
-      </a-form>
+     <a-form  :form="form" v-bind="formLayout">
+          <a-row :gutter="48">
+            <a-col :md="12" :sm="12">
+              <a-form-item label="参数代码">
+                <a-input v-decorator="['code', { initialValue: 0 }]"  placeholder="" />
+              </a-form-item>
+            </a-col>
+             <a-col :md="12" :sm="12">
+                <a-form-item label="参数名称">
+                  <a-input v-decorator="['name', { initialValue: 0 }]" style="width: 100%" />
+                </a-form-item>
+              </a-col>
+            <template v-if="advanced">
+              <a-col :md="8" :sm="24">
+              <a-form-item label="使用状态">
+                <a-select v-decorator="['status', { initialValue: 0 }]" placeholder="请选择" default-value="0">
+                  <a-select-option value="0">全部</a-select-option>
+                  <a-select-option value="1">关闭</a-select-option>
+                  <a-select-option value="2">运行中</a-select-option>
+                </a-select>
+              </a-form-item>
+            </a-col>
+            </template>
+          </a-row>
+        </a-form>
     </a-spin>
   </a-modal>
 </template>
